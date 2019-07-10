@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:munchkin/PlayerCardModel.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Munchkin Mate',
       theme: ThemeData(
         // This is the theme of your application.
         primarySwatch: Colors.blue,
@@ -36,43 +37,59 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _level = 0;
-  int _combat = 0;
-  bool _male = true;
+class _MyHomePageState extends State<MyHomePage>{
+  int cardIndex = 0;
+  PageController pageController = new PageController(viewportFraction: 0.9);
 
-  void _incrementCombatCounter() {
+  var cardList = [
+    new PlayerCardModel(true, 0, 0), 
+    //new PlayerCardModel(false, 0, 10)
+  ];
+
+  void addPlayer(){
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _combat++;
+      cardList.add(new PlayerCardModel(true, 0, 0));
+      pageController.animateToPage(
+        cardList.length -1,
+        curve: Curves.easeOut,
+        duration: Duration(milliseconds: 400),
+        );   
     });
   }
 
-  void _decrementCombatCounter() {
+  void incrementPlayerLevel(int index) {
     setState(() {
-      _combat--;
+      cardList[index].incrementLevelCounter();
     });
   }
 
-  void _incrementLevelCounter() {
+  void decrementPlayerLevel(int index) {
     setState(() {
-      _level++;
+      cardList[index].decrementLevelCounter();
     });
   }
 
-  void _decrementLevelCounter() {
+  void incrementPlayerCombat(int index) {
     setState(() {
-      _level--;
+      cardList[index].incrementCombatCounter();
     });
   }
 
-  void _invertGender() {
+  void decrementPlayerCombat(int index) {
     setState(() {
-      _male = !_male;
+      cardList[index].decrementCombatCounter();
+    });
+  }
+
+  void invertPlayerGender(int index){
+    setState(() {
+      cardList[index].invertGender();
+    });
+  }
+
+  void removeChild(int index) {
+    setState(() {
+      cardList.removeAt(index);
     });
   }
 
@@ -85,88 +102,171 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new FloatingActionButton(
-                  onPressed: _invertGender,
-                  child: new Icon(
-                    _male ? MdiIcons.humanMale : MdiIcons.humanFemale,
-                  ),
-                  backgroundColor: _male ? Colors.blue : Colors.pink,
-                )
-              ]
-            ),
-            new Row(
-              children: <Widget>[
-                Expanded(
-                  child: new TextField(
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(fontSize: 40.0),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Player Name',
+            Container(
+              height: MediaQuery.of(context).size.height - 200,
+              child: PageView.builder(
+                controller: pageController,
+                itemCount: cardList.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, position) {  
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: FloatingActionButton(  
+                                  child: Icon (
+                                    Icons.close,
+                                    color: Colors.blue,
+                                  ),
+                                  onPressed: () => removeChild(position),
+                                  backgroundColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FloatingActionButton(
+                                  onPressed: () => invertPlayerGender(position),
+                                  child: new Icon(
+                                    cardList[position].isMale()? MdiIcons.humanMale : MdiIcons.humanFemale,
+                                  ),
+                                  backgroundColor: cardList[position].isMale() ? Colors.blue : Colors.pink,
+                                ),
+                              ),
+                            Expanded(  
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                textCapitalization: TextCapitalization.words,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Player Name',
+                                ),
+                                style: TextStyle(
+                                  fontSize: 28.0,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Text(
+                                            "Level",
+                                            style: TextStyle(
+                                              fontSize: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                        FloatingActionButton(
+                                          onPressed: () => decrementPlayerLevel(position),
+                                          child: new Icon(
+                                            const IconData(0xe15b, fontFamily: 'MaterialIcons'),
+                                            color: Colors.black),
+                                          backgroundColor: Colors.white,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          child: Text(
+                                            "${cardList[position].getLevel()}",
+                                            style: TextStyle(
+                                              fontSize: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                        FloatingActionButton(
+                                          onPressed: () => incrementPlayerLevel(position),
+                                          child: Icon(
+                                            Icons.add, 
+                                            color: Colors.black,
+                                          ),
+                                          backgroundColor: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Expanded (
+                                          child: Text(
+                                            "Combat",
+                                            style: TextStyle(
+                                              fontSize: 30.0,  
+                                            ),
+                                          ),
+                                        ),
+                                        FloatingActionButton(
+                                          onPressed: () => decrementPlayerCombat(position),
+                                          child: new Icon(
+                                            const IconData(0xe15b, fontFamily: 'MaterialIcons'),
+                                            color: Colors.black),
+                                          backgroundColor: Colors.white,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          child: Text(
+                                            "${cardList[position].getCombat()}",
+                                            style: TextStyle(
+                                              fontSize: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                        FloatingActionButton(
+                                          onPressed: () => incrementPlayerCombat(position),
+                                          child: Icon(
+                                            Icons.add, 
+                                            color: Colors.black,
+                                          ),
+                                          backgroundColor: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                }, 
+              ),
             ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new Text('Level',
-                  style: TextStyle(fontSize: 20.0),
-                )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new FloatingActionButton(
-                  onPressed: _decrementLevelCounter,
-                  child: new Icon(const IconData(0xe15b, fontFamily: 'MaterialIcons'),
-                    color: Colors.black),
-                    backgroundColor: Colors.white,),
-                new Text('$_level',
-                    style: new TextStyle(fontSize: 60.0)),
-                new FloatingActionButton(
-                  onPressed: _incrementLevelCounter,
-                  child: 
-                    new Icon(Icons.add, color: Colors.black,),
-                      backgroundColor: Colors.white,),
-              ],
-            ),
-             new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text('Combat',
-                  style: TextStyle(fontSize: 20.0),
-                )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new FloatingActionButton(
-                  onPressed: _decrementCombatCounter,
-                  child: new Icon(const IconData(0xe15b, fontFamily: 'MaterialIcons'),
-                    color: Colors.black),
-                    backgroundColor: Colors.white,),
-                new Text('$_combat',
-                    style: new TextStyle(fontSize: 60.0)),
-                new FloatingActionButton(
-                  onPressed: _incrementCombatCounter,
-                  child: 
-                    new Icon(Icons.add, color: Colors.black,),
-                      backgroundColor: Colors.white,),
-              ],
+            FloatingActionButton(
+              child: Icon(
+                Icons.add,
+              ),
+              backgroundColor: Colors.blue,
+              onPressed: addPlayer,
             ),
           ],
         ),
