@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class PlayerCardModel {
 
+  String _name;
   bool _isMale;
   int _level;
   int _combat;
 
-  PlayerCardModel(this._isMale, this._level, this._combat);
+  PlayerCardModel(this._name, this._isMale, this._level, this._combat);
 
   void incrementCombatCounter() {
     _combat++;
@@ -38,6 +39,14 @@ class PlayerCardModel {
 
   int getCombat() {
     return _combat;
+  }
+
+  String getName() {
+    return _name;
+  }
+
+  void setName(String name) {
+    _name = name;
   }
 
 }

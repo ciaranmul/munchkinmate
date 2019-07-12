@@ -42,13 +42,12 @@ class _MyHomePageState extends State<MyHomePage>{
   PageController pageController = new PageController(viewportFraction: 0.9);
 
   var cardList = [
-    new PlayerCardModel(true, 0, 0), 
-    //new PlayerCardModel(false, 0, 10)
+    new PlayerCardModel("", true, 1, 1),
   ];
 
   void addPlayer(){
     setState(() {
-      cardList.add(new PlayerCardModel(true, 0, 0));
+      cardList.add(new PlayerCardModel("", true, 1, 1));
       pageController.animateToPage(
         cardList.length -1,
         curve: Curves.easeOut,
@@ -60,12 +59,14 @@ class _MyHomePageState extends State<MyHomePage>{
   void incrementPlayerLevel(int index) {
     setState(() {
       cardList[index].incrementLevelCounter();
+      cardList[index].incrementCombatCounter();
     });
   }
 
   void decrementPlayerLevel(int index) {
     setState(() {
       cardList[index].decrementLevelCounter();
+      cardList[index].decrementCombatCounter();
     });
   }
 
@@ -77,7 +78,8 @@ class _MyHomePageState extends State<MyHomePage>{
 
   void decrementPlayerCombat(int index) {
     setState(() {
-      cardList[index].decrementCombatCounter();
+      if(cardList[index].getCombat() > cardList[index].getLevel())
+        cardList[index].decrementCombatCounter();
     });
   }
 
@@ -151,6 +153,10 @@ class _MyHomePageState extends State<MyHomePage>{
                               ),
                             Expanded(  
                               child: TextField(
+                                controller: new TextEditingController(text: cardList[position].getName() != null ? "${cardList[position].getName()}" : ""),
+                                onChanged: (text) {
+                                  cardList[position].setName(text);
+                                },
                                 textAlign: TextAlign.center,
                                 textCapitalization: TextCapitalization.words,
                                 decoration: InputDecoration(
