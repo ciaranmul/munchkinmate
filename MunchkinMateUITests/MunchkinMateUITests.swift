@@ -1,6 +1,6 @@
 //
-//  Munchkin_MateUITests.swift
-//  Munchkin MateUITests
+//  MunchkinMateUITests.swift
+//  MunchkinMateUITests
 //
 //  Created by Ciarán Mulholland on 07/05/2026.
 //

@@ -1,6 +1,6 @@
 //
-//  Munchkin_MateApp.swift
-//  Munchkin Mate
+//  MunchkinMateApp.swift
+//  MunchkinMate
 //
 //  Created by Ciarán Mulholland on 07/05/2026.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct Munchkin_MateApp: App {
+struct MunchkinMateApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Player.self,

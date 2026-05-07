@@ -1,6 +1,6 @@
 //
 //  Item.swift
-//  Munchkin Mate
+//  MunchkinMate
 //
 //  Created by Ciarán Mulholland on 07/05/2026.
 //

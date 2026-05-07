@@ -1,13 +1,13 @@
 //
-//  Munchkin_MateUITestsLaunchTests.swift
-//  Munchkin MateUITests
+//  MunchkinMateUITestsLaunchTests.swift
+//  MunchkinMateUITests
 //
 //  Created by Ciarán Mulholland on 07/05/2026.
 //
 
 import XCTest
 
-final class Munchkin_MateUITestsLaunchTests: XCTestCase {
+final class MunchkinMateUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
