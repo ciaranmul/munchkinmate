@@ -1,0 +1,32 @@
+//
+//  Munchkin_MateApp.swift
+//  Munchkin Mate
+//
+//  Created by Ciarán Mulholland on 07/05/2026.
+//
+
+import SwiftUI
+import SwiftData
+
+@main
+struct Munchkin_MateApp: App {
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            Player.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(sharedModelContainer)
+    }
+}
