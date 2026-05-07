@@ -29,6 +29,7 @@
 		A06FAF2F2FAC0CBD001CF9F0 /* MunchkinMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MunchkinMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06FAF582FAC0D7E001CF9F0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A06FAF592FAC0D7E001CF9F0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A06FAF7D2FAC1517001CF9F0 /* Privacy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Privacy.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,6 +97,7 @@
 				A06FAF152FAC0CBC001CF9F0 /* Products */,
 				A06FAF582FAC0D7E001CF9F0 /* LICENSE */,
 				A06FAF592FAC0D7E001CF9F0 /* README.md */,
+				A06FAF7D2FAC1517001CF9F0 /* Privacy.md */,
 			);
 			sourceTree = "<group>";
 		};
