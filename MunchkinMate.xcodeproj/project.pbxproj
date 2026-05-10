@@ -24,7 +24,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A06FAF142FAC0CBC001CF9F0 /* MunchkinMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MunchkinMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04D30832FAD41580086ACD3 /* MunchkinMate.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = MunchkinMate.app; path = "/Users/cmulholl/Library/Developer/Xcode/DerivedData/MunchkinMate-ebsytekjulszbaaiqomcvghxlkno/Build/Products/Debug/MunchkinMate.app"; sourceTree = "<absolute>"; };
+		A06FAF142FAC0CBC001CF9F0 /* MunchkinMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MunchkinMate.app; path = /Users/cmulholl/SoftwareProjects/Apps/munchkinmate/build/Debug/MunchkinMate.app; sourceTree = "<absolute>"; };
 		A06FAF252FAC0CBD001CF9F0 /* MunchkinMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MunchkinMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06FAF2F2FAC0CBD001CF9F0 /* MunchkinMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MunchkinMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06FAF582FAC0D7E001CF9F0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -36,7 +37,7 @@
 		A06FAF372FAC0CBD001CF9F0 /* Exceptions for "MunchkinMate" folder in "MunchkinMate" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = A06FAF132FAC0CBC001CF9F0 /* MunchkinMate */;
 		};
@@ -104,9 +105,9 @@
 		A06FAF152FAC0CBC001CF9F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A06FAF142FAC0CBC001CF9F0 /* MunchkinMate.app */,
 				A06FAF252FAC0CBD001CF9F0 /* MunchkinMateTests.xctest */,
 				A06FAF2F2FAC0CBD001CF9F0 /* MunchkinMateUITests.xctest */,
+				A04D30832FAD41580086ACD3 /* MunchkinMate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -311,7 +312,7 @@
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MunchkinMate/Info.plist;
+				INFOPLIST_FILE = MunchkinMate/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Munchkin Mate";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -367,7 +368,7 @@
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MunchkinMate/Info.plist;
+				INFOPLIST_FILE = MunchkinMate/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Munchkin Mate";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
