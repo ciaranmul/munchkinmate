@@ -24,8 +24,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0052C612FB50EB9002A165F /* MunchkinMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MunchkinMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A04D30832FAD41580086ACD3 /* MunchkinMate.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = MunchkinMate.app; path = "/Users/cmulholl/Library/Developer/Xcode/DerivedData/MunchkinMate-ebsytekjulszbaaiqomcvghxlkno/Build/Products/Debug/MunchkinMate.app"; sourceTree = "<absolute>"; };
-		A06FAF142FAC0CBC001CF9F0 /* MunchkinMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MunchkinMate.app; path = /Users/cmulholl/SoftwareProjects/Apps/munchkinmate/build/Debug/MunchkinMate.app; sourceTree = "<absolute>"; };
 		A06FAF252FAC0CBD001CF9F0 /* MunchkinMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MunchkinMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06FAF2F2FAC0CBD001CF9F0 /* MunchkinMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MunchkinMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06FAF582FAC0D7E001CF9F0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -108,6 +108,7 @@
 				A06FAF252FAC0CBD001CF9F0 /* MunchkinMateTests.xctest */,
 				A06FAF2F2FAC0CBD001CF9F0 /* MunchkinMateUITests.xctest */,
 				A04D30832FAD41580086ACD3 /* MunchkinMate.app */,
+				A0052C612FB50EB9002A165F /* MunchkinMate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,7 +135,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Munchkin Mate";
-			productReference = A06FAF142FAC0CBC001CF9F0 /* MunchkinMate.app */;
+			productReference = A0052C612FB50EB9002A165F /* MunchkinMate.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A06FAF242FAC0CBD001CF9F0 /* MunchkinMateTests */ = {

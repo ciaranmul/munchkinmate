@@ -13,8 +13,8 @@ struct ColorValues: Codable {
 }
 
 @Model
-final class Player {
-    var uuid = UUID()
+final class Player: Identifiable {
+    var id = UUID()
     var name: String = "Player"
     var isMale: Bool = true
     private(set) var level: Int = 0

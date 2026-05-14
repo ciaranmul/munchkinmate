@@ -10,12 +10,34 @@ import SwiftUI
 
 struct Navigation: View {
     @State var viewModel: ViewModel
+    @State var selection: Player?
 
     var body: some View {
         NavigationSplitView {
-            PlayerList(players: $viewModel.players) { player in
-                viewModel.delete(player)
+            List(selection: $selection) {
+                ForEach(viewModel.players, id: \.self) { player in
+                    PlayerPreviewView(player: player)
+                        .padding(8)
+                        .background {
+                            player.color
+                                .overlay {
+                                    Color.black.opacity(0.5)
+                                }
+                                .mask {
+                                    RoundedRectangle(cornerRadius: 12)
+                                }
+                        }
+                }
+                .onDelete {
+                    for index in $0 {
+                        viewModel.delete(viewModel.players[index])
+                    }
+                    guard let selection, !viewModel.players.contains(selection) else { return }
+                    self.selection = nil
+                }
             }
+            .listStyle(.inset)
+            .navigationTitle("Players")
             #if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
             #endif
@@ -32,7 +54,12 @@ struct Navigation: View {
                 }
             }
         } detail: {
-            Text("Select a Player")
+            if let selection {
+                PlayerDetail(player: selection)
+                    .id(selection.id)
+            } else {
+                Text("Select a Player")
+            }
         }
         .onAppear {
             viewModel.fetchData()
@@ -41,8 +68,9 @@ struct Navigation: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Player()
-            viewModel.add(newItem)
+            let player = Player()
+            viewModel.add(player)
+            selection = player
         }
     }
 
